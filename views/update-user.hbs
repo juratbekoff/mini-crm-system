@@ -1,0 +1,20 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Updating User</h5>
+        </div>
+
+        {{#each userData}}
+            {{!-- Adding user --}}
+            <form action="/updateuser/:{{this.id}}" method="post">
+
+                {{> user-form }}
+
+                <div class="modal-footer">
+                    <a class="btn btn-secondary" href="/">Go back</a>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        {{/each}}
+    </div>
+</div>
