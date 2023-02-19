@@ -62,13 +62,13 @@ export const updateUserPage = (req: Request, res: Response) => {
 export const updateUserDetails = (req: Request, res: Response) => {
 
     let id = req.params.id
-    let { first_name, last_name, email, phone } = req.body    
-        
+    let { first_name, last_name, email, phone } = req.body
+
     let sql = 'UPDATE user SET first_name=?, last_name=?, email=?, phone=? WHERE id=?'
-        
+
     pool.query(sql, [first_name, last_name, email, phone, id.slice(1, id.length)], (err, data) => {
         if (err) throw err;
-        res.redirect('/')
+        res.redirect(`/view/${id.slice(1, id.length)}`)
     })
 
 }
@@ -76,13 +76,27 @@ export const updateUserDetails = (req: Request, res: Response) => {
 export const deleteUserDetails = (req: Request, res: Response) => {
 
     let id = +req.params.id
-        
+
     let sql = 'DELETE FROM user WHERE id = ?'
-        
+
     pool.query(sql, [id], (err, response) => {
-        if(err) throw err;
+        if (err) throw err;
         res.redirect('/')
     })
+}
+
+export const viewUserPage = (req: Request, res: Response) => {
+
+    let { id } = req.params
+
+    let sql = "SELECT * FROM user WHERE id = ?"
+
+    pool.query(sql, [id], (err, data) => {
+        if (err) throw err;
+
+        res.render("view-page", { details: data })
+    })
+
 }
 
 

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getUsersList, searchingUsers, addUser, addUserPage, updateUserPage, updateUserDetails, deleteUserDetails } from "../controller"
+import { getUsersList, searchingUsers, addUser, addUserPage, updateUserPage, updateUserDetails, deleteUserDetails, viewUserPage } from "../controller"
 
 const router = Router()
 
@@ -13,5 +13,7 @@ const router = Router()
     .get('/adduser', addUserPage)
     .get('/update/:id', updateUserPage)
     .get('/delete/:id', deleteUserDetails)
+
+    .get('/view/:id', viewUserPage )
 
 export default router;
